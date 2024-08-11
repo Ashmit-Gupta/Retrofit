@@ -2,6 +2,7 @@ package com.ashmit.retrofit.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,12 +20,17 @@ import kotlinx.coroutines.withContext
 class RecyclerViewAct : AppCompatActivity() {
     private var userList : User? = null
     private lateinit var myAdapter : RecyclerViewAdapter
+    private lateinit var progressBar : ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_v)
         val rView : RecyclerView = findViewById(R.id.recyclerView)
+        progressBar = findViewById<ProgressBar>(R.id.progress_loader)
+
+        progressBar.visibility = ProgressBar.VISIBLE
         rView.layoutManager = LinearLayoutManager(this)
+
 
         val userListEmpty = User().apply {
             add(UserItem("unable to fetch data", -1, "unable to fetch data", -1))
@@ -62,6 +68,7 @@ class RecyclerViewAct : AppCompatActivity() {
             // Update adapter data on the main thread
             withContext(Dispatchers.Main) {
                 myAdapter.updateData(userList!!)
+                progressBar.visibility = ProgressBar.GONE
             }
 
         }catch(e:Exception){
