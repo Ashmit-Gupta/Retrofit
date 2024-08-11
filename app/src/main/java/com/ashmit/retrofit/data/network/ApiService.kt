@@ -14,7 +14,7 @@ import retrofit2.http.Query
 interface ApiService{
     //end points
     @GET("posts")
-    suspend fun getPost(): retrofit2.Response<User> // returns the list of all the users or all the data//
+    suspend fun getPost(): Response<User> // returns the list of all the users or all the data
 
     //getting the whole data
     @GET("getData.php")
@@ -27,6 +27,7 @@ interface ApiService{
     // Getting the data by ID with a dynamic query parameter
     @GET("getDataById.php")
     suspend fun getDataById(@Query("id") id :Int): retrofit2.Response<SingleItemResponse>
+
 
     @FormUrlEncoded
     @POST("setData.php")
