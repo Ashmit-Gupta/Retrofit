@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+#ignoring this file from tracking
+app/src/main/java/com/ashmit/retrofit/di/ApiConfig.kt
+

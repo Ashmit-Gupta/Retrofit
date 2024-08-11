@@ -52,19 +52,19 @@ class RecyclerViewAct : AppCompatActivity() {
         try{
             val retrofitBuilder = RetrofitBuilder.getInstance().create(ApiService::class.java)
 
-                val response = retrofitBuilder.getPost()
-                Log.d("log ,Status" , response.code().toString())
-                if(response.isSuccessful){
-                    userList = response.body()!!
+            val response = retrofitBuilder.getPost()
+            Log.d("log ,Status" , response.code().toString())
+            if(response.isSuccessful){
+                userList = response.body()!!
 
-                }else{
-                    userList = User().apply {
-                        add(UserItem("unable to fetch data", -1, "unable to fetch data", -1))
-                    }
-
-                    Log.d("log , FAILED" , "unable to get Response")
-                    Log.d("log , FAILED" , response.errorBody().toString())
+            }else{
+                userList = User().apply {
+                    add(UserItem("unable to fetch data", -1, "unable to fetch data", -1))
                 }
+
+                Log.d("log , FAILED" , "unable to get Response")
+                Log.d("log , FAILED" , response.errorBody().toString())
+            }
             // Update adapter data on the main thread
             withContext(Dispatchers.Main) {
                 myAdapter.updateData(userList!!)
