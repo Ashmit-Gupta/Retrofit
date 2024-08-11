@@ -1,5 +1,6 @@
 package com.ashmit.retrofit.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -9,17 +10,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ashmit.retrofit.R
 import com.ashmit.retrofit.data.models.ApiResponse
-import com.ashmit.retrofit.data.models.SingleItemResponse
 import com.ashmit.retrofit.di.RetrofitBuilder
 import com.ashmit.retrofit.data.network.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+//todo remove or api files or the api keys from git and the localhost server
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
         var apiResponse: ApiResponse
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         val tv = findViewById<TextView>(R.id.tv)
         val btnSendData = findViewById<Button>(R.id.btnSendData)
         val btnRecData = findViewById<Button>(R.id.btnGetData)
+        val btnGetDataRV = findViewById<Button>(R.id.btnGetDataForRv)
         val edtName = findViewById<TextView>(R.id.edtName)
         val edtAge = findViewById<TextView>(R.id.edtAge)
         val edtCourse = findViewById<TextView>(R.id.edtCourse)
@@ -82,6 +84,11 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+
+        btnGetDataRV.setOnClickListener {
+            startActivity(Intent(this , RecyclerViewAct::class.java))
+        }
+
     }
 }
 
